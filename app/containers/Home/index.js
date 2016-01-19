@@ -2,31 +2,29 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
-import * as LoadingActions from '../../actions/loading';
-import Button from '../../components/Button';
-import Loading from '../../components/Loading';
+import * as TodoActions from '../../actions/todo';
+import Todo from '../../components/Todo';
 
 import '!style!css!sass!./index.scss';
 
 class Home extends React.Component {
   render() {
-    const { loadingActions } = this.props;
+    const { todoActions, todos } = this.props;
     return (<div className='home-page wrapper-container'>
-              <Loading show={this.props.showLoading}/>
-              <Button name='Joel' onSelect={loadingActions.loadingOn}/>
+              <Todo todoList={todos} onAddClick={this.props.todoActions.addTodo}/>
             </div>);
   }
 }
 
 function mapStateToProps(state) {
   return {
-    showLoading: state.loading,
+    todos: state.todo,
   };
 };
 
 function mapDispatchToProps(dispatch) {
   return {
-    loadingActions: bindActionCreators(LoadingActions, dispatch),
+    todoActions: bindActionCreators(TodoActions, dispatch),
   };
 }
 

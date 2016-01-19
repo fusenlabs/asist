@@ -1,8 +1,8 @@
 import { combineReducers } from 'redux';
-import loading from './loading';
+import todo from './todo';
 
 const rootReducer = combineReducers({
-  loading,
+  todo,
 });
 
 export default rootReducer;
