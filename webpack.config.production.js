@@ -1,5 +1,4 @@
 // webpack.config.js
-var StaticSiteGeneratorPlugin = require('static-site-generator-webpack-plugin');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var webpack = require('webpack');
 
