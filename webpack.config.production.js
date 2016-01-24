@@ -9,13 +9,13 @@ module.exports = ({
     './app/styles/styles.scss'
   ],
   output: {
+    path: './public/dist/',
     filename: 'bundle.js',
-    publicPath: '/dist/',
     libraryTarget: 'umd',
   },
   resolve: {
     alias: {
-      'appConfig': './env/devel-config.js'
+      'appConfig': './env/prod-config.js'
     },
     extensions: ['', '.js']
   },
@@ -43,12 +43,27 @@ module.exports = ({
     ],
   },
   plugins: [
-    new webpack.HotModuleReplacementPlugin(),
-    new webpack.NoErrorsPlugin(),
+    new webpack.DefinePlugin({
+      'process.env': {
+        'NODE_ENV': JSON.stringify('production')
+      }
+    }),
+    new webpack.optimize.UglifyJsPlugin({
+      compress: {
+        warnings: false
+      }
+    }),
     new ExtractTextPlugin('style.css', {
       allChunks: true
+    }),
+    new webpack.ProvidePlugin({
+        'fetch': 'imports?this=>global!exports?global.fetch!whatwg-fetch',
+        'Map': 'core-js/fn/map',
+        'Symbol': 'core-js/fn/symbol',
+        'Promise': 'core-js/fn/promise',
+        'Object.assign': 'core-js/fn/object/assign'
     })
   ],
-  watch: true,
+  watch: false,
   devtool: 'source-map',
 });
