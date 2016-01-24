@@ -33,7 +33,7 @@ module.exports = ({
         exclude: /node_modules/,
         loader: ExtractTextPlugin.extract(
           'style',
-          'css?minimize!sass'
+          'css!sass'
         )
       },
       {
