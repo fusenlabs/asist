@@ -10,7 +10,7 @@ function puts(error, stdout, stderr) {
 }
 
 var gitCommands = [
-    'git add public/',
+    'git add --force public/',
     'git commit -m "gh-pages update"',
     'git subtree push --prefix public origin gh-pages'
 ].join(' && ');
