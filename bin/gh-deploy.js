@@ -2,7 +2,7 @@
 
 var exec = require('child_process').exec;
 function puts(error, stdout, stderr) {
-    if (stderr) {
+  if (stderr) {
     console.error(stderr);
     return;
   }
