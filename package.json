@@ -8,7 +8,7 @@
     "build": "./node_modules/.bin/webpack --config ./webpack.config.production.js --progress --colors",
     "gh-deploy": "node ./bin/gh-deploy.js",
     "deploy": "npm run gh-deploy",
-    "predeploy": "npm build"
+    "predeploy": "npm run build"
   },
   "author": "Fusenlabs.co",
   "license": "ISC",
