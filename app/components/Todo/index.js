@@ -1,4 +1,4 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
 
 import '!style!css!sass!./index.scss';
 
@@ -16,9 +16,9 @@ export default class Todo extends Component {
   }
 
   _handleClick() {
-    const node = this.refs.todoinput
-    const text = node.value.trim()
+    const node = this.refs.todoinput;
+    const text = node.value.trim();
     this.props.onAddClick(text);
-    node.value = ''
+    node.value = '';
   }
 }
