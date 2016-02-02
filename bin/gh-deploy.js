@@ -12,7 +12,9 @@ function puts(error, stdout, stderr) {
 var gitCommands = [
     'git add --force public/',
     'git commit -m "gh-pages update"',
-    'git subtree push --prefix public origin gh-pages'
+    'git subtree push --prefix public origin gh-pages',
+    'git rm --cached -r public/dist',
+    'git reset --soft HEAD~'
 ].join(' && ');
 
 exec(gitCommands, puts);
