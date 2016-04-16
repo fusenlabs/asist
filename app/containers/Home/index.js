@@ -1,31 +1,29 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import * as AppActions from './../../actions/app';
+import Home from './../../components/Home';
 
-import * as TodoActions from '../../actions/todo';
-import Todo from '../../components/Todo';
+class HomeContainer extends Component {
+  constructor() {
+    super();
+  }
 
-import '!style!css!sass!./index.scss';
-
-class Home extends Component {
   render() {
-    const { todoActions, todos } = this.props;
-    return (<div className="home-page wrapper-container">
-              <Todo todoList={todos} onAddClick={todoActions.addTodo}/>
-            </div>);
+    return <Home value={this.props.app.value} increment={this.props.appActions.increment}/>;
   }
 }
 
-function mapStateToProps(state) {
+const mapStateToProps = (state) => {
   return {
-    todos: state.todo
+    app: state.app
   };
-}
+};
 
-function mapDispatchToProps(dispatch) {
+const mapDispatchToProps = (dispatch) => {
   return {
-    todoActions: bindActionCreators(TodoActions, dispatch)
+    appActions: bindActionCreators(AppActions, dispatch)
   };
-}
+};
 
-export default connect(mapStateToProps, mapDispatchToProps)(Home);
+export default connect(mapStateToProps, mapDispatchToProps)(HomeContainer);

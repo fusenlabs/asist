@@ -1,16 +1,17 @@
 {
   "name": "react-redux-boilerplate",
-  "version": "0.1.0",
+  "version": "2.0.0",
   "description": "A boilerplate to fast development under React-Redux tech.",
   "main": "app/index",
   "scripts": {
     "start": "./node_modules/.bin/webpack-dev-server --config ./webpack.config.js --hot --progress --colors --watch --content-base public/",
-    "build": "./node_modules/.bin/webpack --config ./webpack.config.production.js --progress --colors",
+    "build": "NODE_ENV=production ./node_modules/.bin/webpack --config ./webpack.config.production.js --progress --colors",
     "gh-deploy": "node ./bin/gh-deploy.js",
     "deploy": "npm run gh-deploy",
-    "predeploy": "npm run build"
+    "predeploy": "npm run build",
+    "postbuild": "node ./bin/post-build.js"
   },
-  "author": "Fusenlabs.co",
+  "author": "@loverajoel",
   "license": "ISC",
   "devDependencies": {
     "babel-core": "^6.3.26",
@@ -23,20 +24,26 @@
     "eslint": "^1.10.3",
     "eslint-config-rackt": "^1.1.1",
     "eslint-plugin-react": "^3.15.0",
+    "exports-loader": "latest",
     "extract-text-webpack-plugin": "^0.9.1",
     "history": "^1.17.0",
+    "imports-loader": "latest",
     "node-sass": "^3.4.2",
-    "react": "^0.14.3",
-    "react-dom": "^0.14.3",
-    "react-router": "^1.0.3",
+    "react-hot-loader": "^1.3.0",
     "sass-loader": "^3.1.2",
     "static-site-generator-webpack-plugin": "^2.0.1",
     "style-loader": "^0.13.0",
+    "swipe-js-iso": "^2.0.2",
     "webpack": "^1.12.9",
     "webpack-dev-server": "^1.14.1"
   },
   "dependencies": {
-    "react-redux": "^4.0.6",
-    "redux": "^3.0.5"
+    "react": "latest",
+    "react-dom": "latest",
+    "react-router": "latest",
+    "react-redux": "latest",
+    "redux": "latest",
+    "redux-localstorage": "latest",
+    "redux-thunk": "latest"
   }
 }

@@ -1,10 +1,19 @@
-import React from 'react';
-import { Router, Route } from 'react-router';
+import React, { Component } from 'react';
+import { Provider } from 'react-redux';
+import { Router, Route, IndexRoute, hashHistory } from 'react-router';
 
 import Home from './containers/Home';
-import Help from './containers/Help';
 
-export default (<Router>
-                  <Route path='/' component={Home} />
-                  <Route path='help' component={Help} />
-               </Router>);
+const Routes = ({ store }) => (
+  <Provider store={store}>
+    <Router history={hashHistory}>
+      <Route path="/">
+        <IndexRoute component={Home}/>
+      </Route>
+      <Route path="*" component={Home}/>
+    </Router>
+  </Provider>
+);
+
+
+export default Routes;
