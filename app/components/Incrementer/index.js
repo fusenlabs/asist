@@ -4,7 +4,9 @@ const Incrementer = ({ value, increment }) => {
   return (
     <div>
       <button onClick={increment}>+</button>
-      {value}
+      <span>
+      	{value}
+      </span>
     </div>
   );
 };
