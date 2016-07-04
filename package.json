@@ -9,7 +9,8 @@
     "gh-deploy": "node ./bin/gh-deploy.js",
     "deploy": "npm run gh-deploy",
     "predeploy": "npm run build",
-    "postbuild": "node ./bin/post-build.js"
+    "postbuild": "node ./bin/post-build.js",
+    "test": "jest"
   },
   "author": "@loverajoel",
   "license": "ISC",
@@ -28,6 +29,7 @@
     "extract-text-webpack-plugin": "^0.9.1",
     "history": "^1.17.0",
     "imports-loader": "latest",
+    "jest-cli": "^13.0.0",
     "node-sass": "^3.4.2",
     "react-hot-loader": "^1.3.0",
     "sass-loader": "^3.1.2",
