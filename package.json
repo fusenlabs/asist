@@ -31,6 +31,7 @@
     "imports-loader": "latest",
     "jest-cli": "^13.0.0",
     "node-sass": "^3.4.2",
+    "react-addons-test-utils": "^15.2.0",
     "react-hot-loader": "^1.3.0",
     "sass-loader": "^3.1.2",
     "static-site-generator-webpack-plugin": "^2.0.1",

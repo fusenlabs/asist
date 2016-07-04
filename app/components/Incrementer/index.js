@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-const Home = ({ value, increment }) => {
+const Incrementer = ({ value, increment }) => {
   return (
     <div>
       <button onClick={increment}>+</button>
@@ -9,4 +9,4 @@ const Home = ({ value, increment }) => {
   );
 };
 
-export default Home;
+export default Incrementer;
