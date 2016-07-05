@@ -13,6 +13,9 @@ clone this repo.
 
 ```npm start``` will start a server on *localhost:8080*
 
+# Test
+```npm run test``` runs Jest.
+
 # Deploy
 ```npm run deploy``` will build and push into gh-pages.
 

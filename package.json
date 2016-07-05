@@ -9,14 +9,22 @@
     "gh-deploy": "node ./bin/gh-deploy.js",
     "deploy": "npm run gh-deploy",
     "predeploy": "npm run build",
-    "postbuild": "node ./bin/post-build.js"
+    "postbuild": "node ./bin/post-build.js",
+    "test": "jest"
+  },
+  "jest": {
+    "unmockedModulePathPatterns": [
+      "react"
+    ]
   },
   "author": "@loverajoel",
   "license": "ISC",
   "devDependencies": {
     "babel-core": "^6.3.26",
     "babel-eslint": "^5.0.0-beta6",
+    "babel-jest": "^13.0.0",
     "babel-loader": "^6.2.0",
+    "babel-polyfill": "^6.9.1",
     "babel-preset-es2015": "^6.3.13",
     "babel-preset-react": "^6.3.13",
     "core-js": "^2.0.3",
@@ -28,7 +36,9 @@
     "extract-text-webpack-plugin": "^0.9.1",
     "history": "^1.17.0",
     "imports-loader": "latest",
+    "jest-cli": "^13.0.0",
     "node-sass": "^3.4.2",
+    "react-addons-test-utils": "^15.2.0",
     "react-hot-loader": "^1.3.0",
     "sass-loader": "^3.1.2",
     "static-site-generator-webpack-plugin": "^2.0.1",

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as AppActions from './../../actions/app';
-import Home from './../../components/Home';
+import Incrementer from './../../components/Incrementer';
 
 class HomeContainer extends Component {
   constructor() {
@@ -10,7 +10,7 @@ class HomeContainer extends Component {
   }
 
   render() {
-    return <Home value={this.props.app.value} increment={this.props.appActions.increment}/>;
+    return <Incrementer value={this.props.app.value} increment={this.props.appActions.increment}/>;
   }
 }
 
