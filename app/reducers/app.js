@@ -1,6 +1,6 @@
 import { stateTree } from './../store/state';
 
-const initialState = Object.assign({}, stateTree.counter);
+const initialState = Object.assign({}, stateTree);
 
 const fusenrux = (reducer, actionType) => {
   return (reducer.hasOwnProperty(actionType) && reducer[actionType] || reducer.DEFAULT)();
@@ -9,9 +9,15 @@ const fusenrux = (reducer, actionType) => {
 export default (state = initialState, action) => {
   const reducer = {};
 
-  reducer.INCREMENT = () => {
+  reducer.TODOIST_STATUS_OK = () => {
     let newState = Object.assign({}, state);
-    newState.value++;
+    newState.todoist.status_ok = true;
+    return newState;
+  };
+
+  reducer.SET_TODAY_LIST = () => {
+    let newState = Object.assign({}, state);
+    newState.todayList = action.data;
     return newState;
   };
 

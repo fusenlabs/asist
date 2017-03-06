@@ -1,5 +1,7 @@
 export const stateTree = {
-  counter: {
-    value: 0
-  }
+  todoist: {
+    status_ok: false,
+  },
+  loading: false,
+  todayList: [],
 };

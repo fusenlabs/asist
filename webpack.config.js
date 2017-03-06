@@ -1,6 +1,7 @@
 // webpack.config.js
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var webpack = require('webpack');
+var path = require('path');
 
 module.exports = ({
   entry: [
@@ -10,13 +11,14 @@ module.exports = ({
     './app/styles/styles.scss'
   ],
   output: {
+    path: __dirname,
     filename: 'bundle.js',
     publicPath: '/dist/',
     libraryTarget: 'umd',
   },
   resolve: {
     alias: {
-      'appConfig': './env/devel-config.js'
+      appConfig: path.resolve(__dirname) + '/env/dev-config.js',
     },
     extensions: ['', '.js']
   },

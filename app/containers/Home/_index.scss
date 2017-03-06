@@ -1,0 +1,17 @@
+.home {
+    .home-background {
+        background-size: cover;
+        background-position: center center;
+        position: absolute;
+        width: 100%;
+        z-index: 0;
+    }
+
+    .footer {
+        padding: 15px;
+    }
+
+    .main-clock {
+        font-size: 600%;
+    }
+}
