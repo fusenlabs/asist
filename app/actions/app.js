@@ -42,8 +42,6 @@ export const getToken = (code) => {
     todoist.session.code = code;
     todoist.session.getAccessToken().then((response) => {
       localStorage.access_token = response.access_token;
-      // console.log(response);
-      // console.log(todoist.session);
       dispatch(setToken(response.access_token));
       window.location.href = `/${window.location.hash}`;
     });
@@ -60,7 +58,6 @@ const setTodayList = (data) => {
 export const loadTodayList = () => {
   return (dispatch) => {
     todoist.query(['today']).then(r => {
-      console.log(r[0].data);
       dispatch(setTodayList(r[0].data));
     });
   };

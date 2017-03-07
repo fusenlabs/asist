@@ -1,17 +1,61 @@
+body {
+    background-color: #000;
+}
+
 .home {
     .home-background {
         background-size: cover;
         background-position: center center;
         position: absolute;
         width: 100%;
+        opacity: 0.75;
         z-index: 0;
     }
 
     .footer {
         padding: 15px;
+        background: transparent;
     }
 
     .main-clock {
         font-size: 600%;
+    }
+
+    .list-container {
+        transition-property: all;
+        transition-duration: 0.5s;
+        overflow: auto;
+
+        .column {
+            text-transform: uppercase;
+        }
+    }
+
+    .loading {
+        transition-property: opacity;
+        transition-duration: 0.5s;
+
+        &.show {
+            opacity: 1;
+        }
+
+        &.hide {
+            opacity: 0;
+            height: 0;
+            padding: 0;
+        }
+    }
+
+    @-webkit-keyframes rotating {
+        from{
+            -webkit-transform: rotate(0deg);
+        }
+        to{
+            -webkit-transform: rotate(360deg);
+        }
+    }
+
+    .rotating {
+        -webkit-animation: rotating 2s linear infinite;
     }
 }
