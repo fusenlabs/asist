@@ -22,6 +22,14 @@ const Loading = ({ isLoading }) => {
   );
 };
 
+const Motivational = () => {
+  return (
+    <div className="content column animated fadeIn" style={{ animationDelay: '1s' }}>
+      <p>Have a nice day!</p>
+    </div>
+  );
+};
+
 class List extends Component {
   constructor(props) {
     super(props);
@@ -42,19 +50,26 @@ class List extends Component {
     let itemsHeight = todayList.length
       ? todayList.length * this.state.itemHeight + this.state.offset
       : this.state.itemHeight;
-    // todo: move this to utils that can be platform awarness.
+    // TODO: move this to utils that can be platform awarness.
     const maxHeight = window.innerHeight * 0.45; // 45% of total height;
+
     const calculatedHeight = itemsHeight > maxHeight ? maxHeight : itemsHeight;
     const itemList = todayList.map((i, index) => {
       return (
-        <ItemList item={ i } delay={ 0.5 + (index + 1) / 4 } key={ i.id }/>
+        <ItemList item={ i } delay={ 1.5 + (index + 1) / 4 } key={ i.id }/>
       );
     });
+    const isLoading = this.props.app.loading;
+    const hasItems = todayList.length;
 
     return (
       <div className="list-container" style={{ height: calculatedHeight, _border: '1px solid red' }}>
-        <Loading isLoading={!itemList.length}/>
-        { itemList }
+        <Loading isLoading={ isLoading }/>
+        { !isLoading && hasItems ?
+          itemList
+          :
+          <Motivational />
+        }
       </div>
     );
   }

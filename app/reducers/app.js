@@ -21,6 +21,10 @@ export default (state = initialState, action) => {
     return newState;
   };
 
+  reducer.SET_LOADING = () => {
+    return Object.assign({}, { ...state, loading: action.status });
+  };
+
   reducer.DEFAULT = () => state;
 
   return fusenrux(reducer, action.type);

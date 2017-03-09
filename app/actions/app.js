@@ -5,6 +5,13 @@ import { hashHistory } from 'react-router';
 
 const todoist = new TodoistAPI();
 
+export const setLoading = (status = true) => {
+  return {
+    type: 'SET_LOADING',
+    status,
+  };
+};
+
 export const authorize = () => {
   // configure the API
   todoist.session.config({
@@ -57,8 +64,10 @@ const setTodayList = (data) => {
 
 export const loadTodayList = () => {
   return (dispatch) => {
+    dispatch(setLoading());
     todoist.query(['today']).then(r => {
       dispatch(setTodayList(r[0].data));
+      dispatch(setLoading(false));
     });
   };
 };
