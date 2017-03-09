@@ -5,7 +5,7 @@ const Footer = () => {
     <footer className="footer">
       <div className="container level">
         <div className="level-left animated fadeInUp">
-          made by <a href="http://fusenlabs.com" target="_blank">FūsenLabs</a> in C&oacute;rdoba, Argentina
+          <p>made by <a href="https://github.com/fusenlabs" target="_blank">FūsenLabs</a> in C&oacute;rdoba, Argentina</p>
         </div>
         <div className="level-right animated fadeInUp">
           <a href="https://github.com/fusenlabs/asist" target="_blank">
