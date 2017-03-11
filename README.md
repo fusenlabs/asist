@@ -13,7 +13,7 @@ install Chrome addon to work with cors: https://chrome.google.com/webstore/detai
 This is required due to an issue in Todoist API server.
 
 run
-`npm run`
+`npm start`
 
 browse
 <a href="http://localhost:8080" target="_blank">http://localhost:8080</a>
