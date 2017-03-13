@@ -31,10 +31,12 @@ export const authorize = () => {
 export const setToken = (token) => {
   todoist.session.accessToken = token;
   return (dispatch) => {
-    todoist.sync().then((r) => {
+    todoist.sync().then(() => {
       dispatch({
         type: 'TODOIST_STATUS_OK',
       });
+    }).catch(() => {
+      hashHistory.push('/auth');
     });
   };
 };
