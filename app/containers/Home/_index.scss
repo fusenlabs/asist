@@ -25,12 +25,42 @@ body {
         transition-property: all;
         transition-duration: 0.5s;
         overflow: auto;
+        width: 50%;
+        margin-left: 25%;
 
         .column {
             text-transform: uppercase;
 
-            p {
+            &.asist-level-row {
+                margin-bottom: 0;
+            }
+
+            .asist-task-wrapper {
+                margin-bottom: 0;
+            }
+
+            .icon.level-left {
+                max-width: 20px;
+
+                i {
+                    position: absolute;
+                }
+
+            }
+
+            p.level-item.asist-task {
+                justify-content: flex-start;
+                padding-left: 10px;
+                width: 90%;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                height: 21px;
+                align-items: flex-start;
                 color: #fff;
+            }
+
+            a.level-right i {
+                font-size: 15px;
             }
         }
     }

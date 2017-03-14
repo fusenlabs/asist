@@ -73,3 +73,9 @@ export const loadTodayList = () => {
     });
   };
 };
+
+export const removeItem = () => {
+  return (dispatch) => {
+    // TODO: implement
+  };
+};

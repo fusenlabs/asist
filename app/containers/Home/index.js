@@ -21,7 +21,7 @@ class HomeContainer extends Component {
         ></div>
         <Nav />
         <div className="hero-body">
-          <div className="container has-text-centered">
+          <div className="container -has-text-centered">
             <Clock className="main-clock animated fadeIn" />
             <List />
           </div>

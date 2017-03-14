@@ -3,13 +3,80 @@ import { bindActionCreators } from 'redux';
 import * as AppActions from './../../actions/app';
 import { connect } from 'react-redux';
 
-const ItemList = ({ item, delay }) => {
+const OpenExternalLink = ({ link }) => {
   return (
-    <div className="column animated flipInX" style={{ animationDelay: `${delay}s` }}>
-      {item.content}
-    </div>
+    <a href={link} target="_blank" className="level-item level-right" style={{ maxWidth: 20 }}>
+      <span className="icon">
+        <i className="fa fa-external-link-square"></i>
+      </span>
+    </a>
   );
 };
+
+const Checkbox = ({ checked }) => {
+  const checkedClassName = checked ? 'fadeIn' : 'fadeOut';
+  const uncheckedClassName = !checked ? 'fadeIn' : 'fadeOut';
+  return (
+    <span className="icon level-item level-left">
+      <i className={`fa fa-check-square-o animated ${checkedClassName}`}></i>
+      <i className={`fa fa-square-o animated ${uncheckedClassName}`}></i>
+    </span>
+  );
+};
+
+
+const ItemLabel = ({ children }) => {
+  return (
+    <p className="level-item asist-task">{children}</p>
+  );
+};
+
+class ItemList extends Component {
+  constructor(props) {
+    super(props);
+    this._onMouseEnter = this._onMouseEnter.bind(this);
+    this._onMouseLeave = this._onMouseLeave.bind(this);
+    this.state = {
+      rowHover: false,
+    };
+  }
+
+  render() {
+    const { item, delay } = this.props;
+    const externalUrl = `https://todoist.com/app?#project%2F${item.project_id}`;
+    return (
+      <div className="column level is-mobile asist-level-row animated flipInX" style={{ animationDelay: `${delay}s` }}>
+        <a href="#"
+          className="level is-mobile asist-task-wrapper"
+          onClick={ this._onClick}
+          onMouseEnter={ this._onMouseEnter }
+          onMouseLeave={ this._onMouseLeave }
+          data-task-id={ item.id }>
+          <Checkbox checked={ this.state.rowHover } />
+          <ItemLabel>{ item.content }</ItemLabel>
+        </a>
+        <OpenExternalLink link={ externalUrl } />
+      </div>
+    );
+  }
+
+  _onMouseEnter() {
+    this.setState({
+      rowHover: true,
+    });
+  }
+  _onMouseLeave() {
+    this.setState({
+      rowHover: false,
+    });
+  }
+
+  _onClick(e) {
+    e.preventDefault();
+    console.log(e.currentTarget.getAttribute('data-task-id'));
+    // this.props.removeItem(e.currentTarget.getAttribute('data-task-id'));
+  }
+}
 
 const Loading = ({ isLoading }) => {
   const visibleClassName = isLoading ? 'show' : 'hide';
