@@ -1,6 +1,7 @@
 // webpack.config.js
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var webpack = require('webpack');
+var path = require('path');
 
 module.exports = ({
   entry: [
@@ -14,7 +15,7 @@ module.exports = ({
   },
   resolve: {
     alias: {
-      'appConfig': './env/prod-config.js'
+      appConfig: path.resolve(__dirname) + '/env/prod-config.js',
     },
     extensions: ['', '.js']
   },
