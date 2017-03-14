@@ -37,6 +37,11 @@ export default (state = initialState, action) => {
     return newState;
   };
 
+  reducer.REMOVE_ITEM_BY_ID = () => {
+    newState.todayList = newState.todayList.filter(i => i.id !== action.data);
+    return newState;
+  };
+
   reducer.DEFAULT = () => state;
 
   return fusenrux(reducer, action.type);

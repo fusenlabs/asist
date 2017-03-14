@@ -81,9 +81,16 @@ const flagRemovedItem = (itemId) => {
   };
 };
 
-const removeFlaggedItems = () => {
+export const removeFlaggedItems = () => {
   return {
     type: 'REMOVE_FLAGGED_ITEMS',
+  };
+};
+
+const removeItemById = (itemId) => {
+  return {
+    type: 'REMOVE_ITEM_BY_ID',
+    data: itemId,
   };
 };
 
@@ -92,13 +99,19 @@ export const removeItem = (itemId) => {
     // dispatch event to flag removed item. (it will animate item to fade out)
     dispatch(flagRemovedItem(itemId));
     // call API to remove (server side remotion)
+    todoist.items.complete([itemId]);
     // verify remotion succeded, otherwise, restore objects (should flag item as restored?)
-
+    todoist.commit().then(response => {
+      const removedItem = response.items.find(i => i.id === itemId);
+      if (removeItem.checked) {
+        // @TODO: should restore redux elements
+        console.warn(`Something failed completing ${itemId}: ${removedItem.content}`);
+      }
+    });
+    // dispatch event to remove items from redux
     const animationTimeout = 1500;
     setTimeout(() => {
-      dispatch(removeFlaggedItems());
+      dispatch(removeItemById(itemId));
     }, animationTimeout);
-
-    // dispatch event to remove items from redux
   };
 };
