@@ -74,8 +74,31 @@ export const loadTodayList = () => {
   };
 };
 
-export const removeItem = () => {
+const flagRemovedItem = (itemId) => {
+  return {
+    type: 'FLAG_REMOVED_ITEM',
+    data: itemId,
+  };
+};
+
+const removeFlaggedItems = () => {
+  return {
+    type: 'REMOVE_FLAGGED_ITEMS',
+  };
+};
+
+export const removeItem = (itemId) => {
   return (dispatch) => {
-    // TODO: implement
+    // dispatch event to flag removed item. (it will animate item to fade out)
+    dispatch(flagRemovedItem(itemId));
+    // call API to remove (server side remotion)
+    // verify remotion succeded, otherwise, restore objects (should flag item as restored?)
+
+    const animationTimeout = 1500;
+    setTimeout(() => {
+      dispatch(removeFlaggedItems());
+    }, animationTimeout);
+
+    // dispatch event to remove items from redux
   };
 };

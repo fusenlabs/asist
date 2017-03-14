@@ -13,12 +13,14 @@ const OpenExternalLink = ({ link }) => {
   );
 };
 
-const Checkbox = ({ checked }) => {
+const Checkbox = ({ checked, animated }) => {
+  // if item is being removed stop animation of checkbox by this.props.animated
   const checkedClassName = checked ? 'fadeIn' : 'fadeOut';
   const uncheckedClassName = !checked ? 'fadeIn' : 'fadeOut';
+  const animatedClassName = animated ? 'animated' : '';
   return (
     <span className="icon level-item level-left">
-      <i className={`fa fa-check-square-o animated ${checkedClassName}`}></i>
+      <i className={`fa fa-check-square-o ${animatedClassName} ${checkedClassName}`}></i>
       <i className={`fa fa-square-o animated ${uncheckedClassName}`}></i>
     </span>
   );
@@ -27,7 +29,7 @@ const Checkbox = ({ checked }) => {
 
 const ItemLabel = ({ children }) => {
   return (
-    <p className="level-item asist-task">{children}</p>
+    <p className="level-item">{children}</p>
   );
 };
 
@@ -36,28 +38,46 @@ class ItemList extends Component {
     super(props);
     this._onMouseEnter = this._onMouseEnter.bind(this);
     this._onMouseLeave = this._onMouseLeave.bind(this);
+    this._onClick = this._onClick.bind(this);
+
     this.state = {
       rowHover: false,
+      delay: props.delay,
     };
   }
 
   render() {
-    const { item, delay } = this.props;
+    const { item } = this.props;
     const externalUrl = `https://todoist.com/app?#project%2F${item.project_id}`;
+    const statusClassName = this._getClassNameByStatus(this.props.removed);
+    const statusStyle = this._getStyleNameByStatus(this.props.removed);
     return (
-      <div className="column level is-mobile asist-level-row animated flipInX" style={{ animationDelay: `${delay}s` }}>
+      <div
+        className={ `column level is-mobile asist-level-row animated ${statusClassName}` }
+        style={ statusStyle }>
         <a href="#"
           className="level is-mobile asist-task-wrapper"
           onClick={ this._onClick}
           onMouseEnter={ this._onMouseEnter }
           onMouseLeave={ this._onMouseLeave }
           data-task-id={ item.id }>
-          <Checkbox checked={ this.state.rowHover } />
+          <Checkbox
+            checked={ this.state.rowHover || this.props.removed }
+            animated={ !this.props.removed }
+          />
           <ItemLabel>{ item.content }</ItemLabel>
         </a>
         <OpenExternalLink link={ externalUrl } />
       </div>
     );
+  }
+
+  _getClassNameByStatus(removed) {
+    return removed ? 'fadeOut asist-animated-item asist-shrink-item' : 'flipInX';
+  }
+
+  _getStyleNameByStatus(removed) {
+    return removed ? {} : { animationDelay: `${this.state.delay}s` };
   }
 
   _onMouseEnter() {
@@ -74,14 +94,14 @@ class ItemList extends Component {
   _onClick(e) {
     e.preventDefault();
     console.log(e.currentTarget.getAttribute('data-task-id'));
-    // this.props.removeItem(e.currentTarget.getAttribute('data-task-id'));
+    this.props.removeItem(e.currentTarget.getAttribute('data-task-id'));
   }
 }
 
 const Loading = ({ isLoading }) => {
   const visibleClassName = isLoading ? 'show' : 'hide';
   return (
-    <div className={`column loading ${visibleClassName}`}>
+    <div className={`column loading has-text-centered ${visibleClassName}`}>
       <span className="icon rotating">
         <i className="fa fa-circle-o-notch"></i>
       </span>
@@ -91,7 +111,7 @@ const Loading = ({ isLoading }) => {
 
 const Motivational = () => {
   return (
-    <div className="content column animated fadeIn" style={{ animationDelay: '1s' }}>
+    <div className="content column animated fadeIn has-text-centered" style={{ animationDelay: '1s' }}>
       <p>Have a nice day!</p>
     </div>
   );
@@ -100,6 +120,7 @@ const Motivational = () => {
 class List extends Component {
   constructor(props) {
     super(props);
+    this._onRemoveItem = this._onRemoveItem.bind(this);
     this.state = {
       offset: 5, // space in pixels to avoid unnecesary scroll into container.
       itemHeight: 42, // height of single list item in pixels.
@@ -123,7 +144,13 @@ class List extends Component {
     const calculatedHeight = itemsHeight > maxHeight ? maxHeight : itemsHeight;
     const itemList = todayList.map((i, index) => {
       return (
-        <ItemList item={ i } delay={ 1.5 + (index + 1) / 4 } key={ i.id }/>
+        <ItemList
+          item={ i }
+          delay={ 0.5 + (index + 1) / 4 }
+          key={ i.id }
+          removed={ i._removed }
+          removeItem={ this._onRemoveItem }
+        />
       );
     });
     const isLoading = this.props.app.loading;
@@ -139,6 +166,10 @@ class List extends Component {
         }
       </div>
     );
+  }
+
+  _onRemoveItem(itemId) {
+    this.props.appActions.removeItem(Number(itemId));
   }
 }
 

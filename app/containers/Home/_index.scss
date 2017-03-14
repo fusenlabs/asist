@@ -18,25 +18,41 @@ body {
     }
 
     .main-clock {
-        font-size: 600%;
+        font-size: 8em;
     }
 
     .list-container {
         transition-property: all;
         transition-duration: 0.5s;
         overflow: auto;
-        width: 50%;
-        margin-left: 25%;
+        width: 100%;
+        max-width: 600px;
+        margin: 0 auto;
 
         .column {
             text-transform: uppercase;
+            transition-property: all; //height, padding;
+            transition-duration: 0.5s;
 
             &.asist-level-row {
                 margin-bottom: 0;
+                padding: 0;
+                height: 42px;
+            }
+
+            &.asist-animated-item {
+                transition-delay: 0.5s;
+            }
+
+            &.asist-shrink-item {
+                height: 0;
+                padding-bottom: 0;
+                padding-top: 0;
             }
 
             .asist-task-wrapper {
                 margin-bottom: 0;
+                overflow: hidden;
             }
 
             .icon.level-left {
@@ -48,14 +64,7 @@ body {
 
             }
 
-            p.level-item.asist-task {
-                justify-content: flex-start;
-                padding-left: 10px;
-                width: 90%;
-                overflow: hidden;
-                text-overflow: ellipsis;
-                height: 21px;
-                align-items: flex-start;
+            p {
                 color: #fff;
             }
 
