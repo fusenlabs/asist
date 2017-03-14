@@ -36,7 +36,7 @@ export const setToken = (token) => {
         type: 'TODOIST_STATUS_OK',
       });
     }).catch(() => {
-      hashHistory.push('/auth');
+      hashHistory.push('./auth');
     });
   };
 };
