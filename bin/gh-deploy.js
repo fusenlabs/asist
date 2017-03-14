@@ -14,7 +14,7 @@ var fs = require('fs');
 var dir = './deploy';
 var bootCommands = [
   'cd deploy/',
-  'git clone -b gh-pages git@github.com:fusenlabs/infinite-music-trivia.git .'
+  'git clone -b gh-pages git@github.com:fusenlabs/asist.git .'
 ].join(' && ');
 
 var deployCommands = [
@@ -35,17 +35,7 @@ if (!fs.existsSync(dir)) {
 } else {
   exec(deployCommands, puts);
 
-  var log = [
-    '/*',
-    '|--------------------------------------------------------------------------',
-    '| Media Temple deploy',
-    '|--------------------------------------------------------------------------',
-    '|',
-    '| For deployment into fusenlabs.co IMT visit the following link',
-    '| https://fusenlabs.co/app/imt/deploy.php',
-    '|',
-    '*/'
-  ];
+  var log = [];
   for (var el in log) { console.log(log[el]); }
 }
 
