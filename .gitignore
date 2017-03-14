@@ -4,4 +4,3 @@ dist
 env/prod-config.js
 env/dev-config.js
 npm-debug.log
-deploy
