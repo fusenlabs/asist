@@ -5,6 +5,25 @@ import { hashHistory } from 'react-router';
 
 const todoist = new TodoistAPI();
 
+// object to user server as proxy for acces token exchange
+const customServer = {
+  serverURL: `https://fusenlabs.com/asist/proxy.php`,
+  getAccessToken: (code) => {
+    let headers = {
+      Accept: 'application/json, text/plain, */*',
+      'Content-Type': 'application/json',
+    };
+    const request_url = `${customServer.serverURL}?code=${code}`;
+    return fetch(request_url, {
+      method: 'GET',
+      headers: headers,
+      credentials: 'include',
+    }).then(response => {
+      return response.json();
+    });
+  },
+};
+
 export const setLoading = (status = true) => {
   return {
     type: 'SET_LOADING',
@@ -36,7 +55,7 @@ export const setToken = (token) => {
         type: 'TODOIST_STATUS_OK',
       });
     }).catch(() => {
-      hashHistory.push('./auth');
+      hashHistory.push('auth');
     });
   };
 };
@@ -49,9 +68,20 @@ export const getToken = (code) => {
       client_secret: config.CLIENT_SECRET,
     });
     todoist.session.code = code;
-    todoist.session.getAccessToken().then((response) => {
-      localStorage.access_token = response.access_token;
-      dispatch(setToken(response.access_token));
+    // API server response is unreachable by javascript due to
+    // cors restriction because of the missing header Access-Control-Allow-Origin.
+    // todoist.session.getAccessToken(code).then((response) => {
+    //   localStorage.access_token = response.access_token;
+    //   dispatch(setToken(response.access_token));
+    //   window.location.href = `/${window.location.hash}`;
+    // });
+
+    // lets use our own server as proxy
+    customServer.getAccessToken(code).then((response) => {
+      if (response.access_token) {
+        localStorage.access_token = response.access_token;
+        dispatch(setToken(response.access_token));
+      }
       window.location.href = `/${window.location.hash}`;
     });
   };
