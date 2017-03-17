@@ -82,7 +82,7 @@ export const getToken = (code) => {
         localStorage.access_token = response.access_token;
         dispatch(setToken(response.access_token));
       }
-      window.location.href = `/${window.location.hash}`;
+      window.location.href = `${window.location.origin}${window.location.pathname}${window.location.hash}`;
     });
   };
 };
