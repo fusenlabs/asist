@@ -4,7 +4,7 @@ This applications is a demo that implements a real-life scene for [todoist-js](h
 
 ![home page](https://fusenlabs.com/asist/screenshot_01.png "Screenshot")
 #### Features
-- Display a list of your Today's tasks from Todoist.
+- Display the content of your Today folder from Todoist.
 - Complete a task (applying changes in your Todoist).
 - Open a task in Todoist.
 
