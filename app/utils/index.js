@@ -31,11 +31,10 @@ export const getURLParams = query => {
 
 const imagesStock = [
   './photos/pexels-photo-286280.jpeg',
-  'https://static.pexels.com/photos/286280/pexels-photo-286280.jpeg',
+  './photos/rain_water_inspiring.jpg',
   'https://static.pexels.com/photos/24962/pexels-photo.jpg',
   'http://www.mrwallpaper.com/wallpapers/space-stars-road.jpg',
-  'https://www.bhmpics.com/wallpapers/rain_water_inspiring-3840x2160.jpg',
 ];
 export const ImageProvider = {
-  picOfDay: () => imagesStock[0],
+  picOfDay: () => imagesStock[Number(Math.random() >= 0.5)],// random between 1st and 2nd pics
 };
