@@ -38,7 +38,6 @@ export const authorize = () => {
     client_id: config.CLIENT_ID,
     scope: 'data:read_write',
     state: utils.generateState(),
-    client_secret: config.CLIENT_SECRET,
   });
 
   window.location.href = todoist.session.requestAuthorizationUrl();
@@ -65,18 +64,12 @@ export const getToken = (code) => {
     todoist.session.config({
       app_token: config.APP_TOKEN,
       client_id: config.CLIENT_ID,
-      client_secret: config.CLIENT_SECRET,
     });
     todoist.session.code = code;
     // API server response is unreachable by javascript due to
     // cors restriction because of the missing header Access-Control-Allow-Origin.
-    // todoist.session.getAccessToken(code).then((response) => {
-    //   localStorage.access_token = response.access_token;
-    //   dispatch(setToken(response.access_token));
-    //   window.location.href = `/${window.location.hash}`;
-    // });
 
-    // lets use our own server as proxy
+    // lets use our own server as proxy for access token exchange
     customServer.getAccessToken(code).then((response) => {
       if (response.access_token) {
         localStorage.access_token = response.access_token;

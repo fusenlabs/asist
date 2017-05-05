@@ -1,5 +1,4 @@
 export default {
   APP_TOKEN: 'XXXX',
   CLIENT_ID: 'XXXX',
-  CLIENT_SECRET: 'XXXX',
 };
