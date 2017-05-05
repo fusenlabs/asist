@@ -5,7 +5,7 @@ import { hashHistory } from 'react-router';
 
 const todoist = new TodoistAPI();
 
-// object to user server as proxy for acces token exchange
+// object to use a server as proxy for acces token exchange
 const customServer = {
   serverURL: `https://fusenlabs.com/asist/proxy.php`,
   getAccessToken: (code) => {

@@ -2,7 +2,8 @@
 ### A friendly reminder for your daily to-do's (for Todoist users)
 This applications is a demo that implements a real-life scene for [todoist-js](https://github.com/Cosmitar/todoist-js).
 
-![home page](https://fusenlabs.com/asist/screenshot_01.png "Screenshot")
+<img src="./assets/screenshot_01.png" width="300">
+
 #### Features
 - Displays content of your __Today__ folder from Todoist.
 - Completes tasks (applying changes in your Todoist account).
